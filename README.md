@@ -1,6 +1,6 @@
 # 1. Información básica del proyecto
 
-## E-commerce Aesthectic Arc
+## E-commerce Aesthetic Arc
 
 Es una aplicación web que simula un sitio web de comercio electronico (E-commerce) de prendas de vestir.
 
