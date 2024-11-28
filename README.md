@@ -14,22 +14,19 @@ Para hacer uso del proyecto primero se debe entender la estructuración de carpe
 
 ### En resumen:
 
-### Frontend: React.js
+Frontend: React.js
 
-### Backend: Node.js + Express.js (lógica del servidor) + MongoDB y PostgreSQL (almacenamiento de datos)
+Backend: Node.js + Express.js (lógica del servidor) + MongoDB y PostgreSQL (almacenamiento de datos)
 
 ### Ejecución Backend:
 
 1. Abra una terminal dentro de la carpeta "ecommerce".
+
 2. Ejecute el siguiente comando:
 
 ### `cd be/`
 
 3. Instalar las dependencias:
-
-- Abre una terminal en el directorio del proyecto (donde se encuentra el archivo package.json).
-
-- Ejecuta el comando:
 
 ### `npm install`
 
