@@ -33,3 +33,29 @@ Backend: Node.js + Express.js (lógica del servidor) + MongoDB y PostgreSQL (alm
 4. Iniciar el servidor:
 
 ### `node servidor.js` o para recargar automaticamente `npx nodemon servidor.js`
+
+5. Previamente asegúrese de tener las herramientas necesarias como Node.js y npm.
+
+### `node -v` y `npm -v`
+
+### Ejecución Frontend:
+
+1. Abra una terminal dentro de la carpeta "ecommerce".
+
+2. Ejecute el siguiente comando:
+
+### `cd fe/`
+
+3. Instalar las dependencias:
+
+### `npm install`
+
+4. Iniciar el servidor:
+
+### `npm start`
+
+5. Configuración adicional (si es necesario)
+
+- Archivo .env: Asegúrate de que las variables en el archivo .env estén correctamente configuradas (por ejemplo, URL de la API del backend).
+
+- Tailwind CSS: Este proyecto incluye configuración para Tailwind (tailwind.config.js). Verifica que Tailwind esté funcionando correctamente al iniciar el servidor de desarrollo.
