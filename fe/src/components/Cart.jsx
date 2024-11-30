@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -37,11 +37,16 @@ const products = [
   // More products...
 ];
 
-export default function Example() {
-  const [open, setOpen] = useState(true);
+export default function Example({ open, setOpen, items }) {
+  const [localOpen, setLocalOpen] = useState(open); // Usamos localOpen para el estado
+
+  // Sincronizamos el estado local con las props
+  useEffect(() => {
+    setLocalOpen(open);
+  }, [open]);
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog open={localOpen} onClose={setLocalOpen} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"
@@ -63,7 +68,7 @@ export default function Example() {
                     <div className="ml-3 flex h-7 items-center">
                       <button
                         type="button"
-                        onClick={() => setOpen(false)}
+                        onClick={() => setLocalOpen(!localOpen)}
                         className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
                       >
                         <span className="absolute -inset-0.5" />
@@ -79,12 +84,12 @@ export default function Example() {
                         role="list"
                         className="-my-6 divide-y divide-gray-200"
                       >
-                        {products.map((product) => (
-                          <li key={product.id} className="flex py-6">
+                        {items.map((item) => (
+                          <li key={item._id} className="flex py-6">
                             <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                               <img
-                                alt={product.imageAlt}
-                                src={product.imageSrc}
+                                alt={item.product.name}
+                                src={item.product.image}
                                 className="size-full object-cover"
                               />
                             </div>
@@ -93,17 +98,14 @@ export default function Example() {
                               <div>
                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                   <h3>
-                                    <a href={product.href}>{product.name}</a>
+                                    <a href="#">{item.product.name}</a>
                                   </h3>
-                                  <p className="ml-4">{product.price}</p>
+                                  <p className="ml-4">{item.product.price}</p>
                                 </div>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {product.color}
-                                </p>
                               </div>
                               <div className="flex flex-1 items-end justify-between text-sm">
                                 <p className="text-gray-500">
-                                  Qty {product.quantity}
+                                  Qty {item.quantity}
                                 </p>
 
                                 <div className="flex">
@@ -126,7 +128,7 @@ export default function Example() {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>$262.00</p>
+                    <p>$000</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
                     Shipping and taxes calculated at checkout.

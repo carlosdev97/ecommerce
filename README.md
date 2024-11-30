@@ -10,7 +10,13 @@ En el desarrollo del proyecto, se ha implementado inicialmente la funcionalidad 
 
 # 3. Instalación
 
-Para hacer uso del proyecto primero se debe entender la estructuración de carpetas y basicamente la carpeta raiz del proyecto es la carpeta llamada "ecommerce" dentro se alojan 2 subcarpetas con el nombre de "be" y "fe" donde se alojan el backend y el frontend respectivamente. Para el desarrollo del proyecto se uso como modelo el estack MERN por lo cual para la parte del backend o servidor se uso Node.js como entorno de ejecución de JavaScript, Express.js para la simplificar la creación de rutas, middleware y controladores para el manejo de solicitudes HTTP. Para la persitencia de los datos se uso el modelo relacional con PostgreSQL para la gestión de usuarios y para la gestión de productos se uso un modelo No relacional MongoDB Atlas. Y para renderizar la vista en el navegador y gestionar el estado de la interfaz se uso React.js.
+Aquí tienes una versión corregida y mejorada:
+
+Para utilizar el proyecto, primero es necesario comprender la estructura de carpetas. La carpeta principal del proyecto se llama "ecommerce", y dentro de ella se encuentran dos subcarpetas: "be" y "fe", que contienen respectivamente el backend y el frontend.
+
+El proyecto sigue el modelo de arquitectura MERN (MongoDB, Express, React, Node.js). En el backend, se utiliza Node.js como entorno de ejecución de JavaScript, y Express.js para simplificar la creación de rutas, middleware y controladores para el manejo de solicitudes HTTP. Para la persistencia de datos, se emplean dos bases de datos: PostgreSQL, un sistema de base de datos relacional para gestionar usuarios, y MongoDB Atlas, una base de datos no relacional para la gestión de productos.
+
+En el frontend, React.js se encarga de renderizar la vista en el navegador y gestionar el estado de la interfaz de usuario.
 
 ### En resumen:
 

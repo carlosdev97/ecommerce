@@ -1,3 +1,4 @@
+import Example from "./Cart";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,9 +7,14 @@ import apiClient from "../API/axiosConfig";
 
 const Header = () => {
   const [user, setUser] = useState(null);
-  // const [cart, setCart] = useState("")
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen); // Alterna entre abrir y cerrar el carrito
+  };
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -23,7 +29,8 @@ const Header = () => {
       const response = await apiClient.get(
         `http://localhost:5000/api/cart/${user.id}`
       );
-      console.log(response.data);
+      setCartItems(response.data.products);
+      console.log(response.data.products);
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +57,10 @@ const Header = () => {
                 <FontAwesomeIcon
                   icon={faBagShopping}
                   className="text-gray-300 cursor-pointer"
-                  onClick={getCart}
+                  onClick={() => {
+                    getCart();
+                    toggleCart();
+                  }}
                 />
                 <span className="text-gray-300">{user.name}</span>
               </div>
@@ -58,13 +68,27 @@ const Header = () => {
                 onClick={handleLogout}
                 className="text-red-500 hover:text-red-300 ml-4"
               >
-                Log out
+                Cerrar Sesión
               </button>
+              <Example
+                open={isCartOpen}
+                setOpen={setIsCartOpen}
+                items={cartItems}
+              />
             </>
           ) : (
-            <Link to="/login" className="hover:text-gray-300">
-              Log in
-            </Link>
+            <>
+              <Link
+                to="/register"
+                className="hover:text-gray-300 hover:underline"
+              >
+                Registrarse
+              </Link>
+
+              <Link to="/login" className="hover:text-gray-300 hover:underline">
+                Iniciar Sesión
+              </Link>
+            </>
           )}
         </div>
       </nav>
