@@ -1,9 +1,9 @@
-import Example from "./Cart";
+import Example from "../Cart";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
-import apiClient from "../API/axiosConfig";
+import apiClient from "../../API/axiosConfig";
 
 const Header = () => {
   const [user, setUser] = useState(null);
