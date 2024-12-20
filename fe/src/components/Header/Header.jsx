@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../API/axiosConfig";
 
-const Header = () => {
+const Header = ({ onOpenModal }) => {
   const [user, setUser] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -44,10 +44,10 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white py-4">
+    <header className="fixed top-0 left-0 w-full backdrop-blur-md text-black py-4">
       <nav className="container mx-auto flex justify-between items-center">
         <a href="/">
-          <h1 className="text-lg font-bold">Aesthetic Arc</h1>
+          <h1 className="font-homemade">Aesthetic Arc</h1>
         </a>
         <div className="flex space-x-4 items-center">
           {location.pathname === "/products" && user ? (
@@ -78,16 +78,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link
-                to="/register"
-                className="hover:text-gray-300 hover:underline"
-              >
-                Registrarse
-              </Link>
-
-              <Link to="/login" className="hover:text-gray-300 hover:underline">
-                Iniciar Sesión
-              </Link>
+              <FontAwesomeIcon onClick={onOpenModal} icon={faUser} />
+              {/* <Link to="/login" className="hover:text-gray-300 hover:underline">
+                
+              </Link> */}
             </>
           )}
         </div>

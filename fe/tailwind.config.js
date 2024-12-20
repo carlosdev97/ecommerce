@@ -5,7 +5,11 @@ module.exports = {
     "./public/index.html", // Archivo HTML principal
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        homemade: ["Homemade Apple", "serif"], // Define el nombre y la familia
+      },
+    },
   },
   plugins: [],
 };
