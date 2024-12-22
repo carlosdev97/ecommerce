@@ -6,22 +6,38 @@ const Modal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-container">
+      <div className="modal-container w-full max-w-3xl">
         <button className="modal-close" onClick={onClose}>
           &times;
         </button>
-        <h2>Iniciar Sesión</h2>
-        <form>
+        <h2>Ingresar con email y contraseña</h2>
+        <form className="max-w-sm m-auto h-96 display-flex">
           <div className="form-group">
-            <label htmlFor="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" required />
+            <label className="text-left" htmlFor="email">
+              EMAIL
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@mail.com"
+              required
+            />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
-            <input type="password" id="password" name="password" required />
+            <label className="text-left" htmlFor="password">
+              CONTRASEÑA
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="**********"
+              required
+            />
           </div>
-          <button type="submit" className="btn">
-            Iniciar Sesión
+          <button type="submit" className="btn display-block w-full">
+            INGRESAR
           </button>
         </form>
       </div>

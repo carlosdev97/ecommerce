@@ -78,7 +78,11 @@ const Header = ({ onOpenModal }) => {
             </>
           ) : (
             <>
-              <FontAwesomeIcon onClick={onOpenModal} icon={faUser} />
+              <FontAwesomeIcon
+                className="cursor-pointer"
+                onClick={onOpenModal}
+                icon={faUser}
+              />
               {/* <Link to="/login" className="hover:text-gray-300 hover:underline">
                 
               </Link> */}
