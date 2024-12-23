@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../API/axiosConfig";
 
-const Header = ({ onOpenModal }) => {
+const Header = ({ onOpenModal, onOpenMenu }) => {
   const [user, setUser] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const navigate = useNavigate();
+
   const location = useLocation();
 
   const toggleCart = () => {
@@ -22,7 +22,7 @@ const Header = ({ onOpenModal }) => {
       const userObj = JSON.parse(savedUser);
       setUser(userObj);
     }
-  }, []);
+  }, [location]);
 
   const getCart = async () => {
     try {
@@ -36,13 +36,6 @@ const Header = ({ onOpenModal }) => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-    navigate("/login");
-  };
-
   return (
     <header className="fixed top-0 left-0 w-full backdrop-blur-md text-black py-4">
       <nav className="container mx-auto flex justify-between items-center">
@@ -52,8 +45,18 @@ const Header = ({ onOpenModal }) => {
         <div className="flex space-x-4 items-center">
           {location.pathname === "/products" && user ? (
             <>
+              {console.log(location.pathname)}
+              {console.log(user)}
               <div className="flex items-center space-x-2">
-                <FontAwesomeIcon icon={faUser} className="text-gray-300" />
+                <div
+                  className="flex items-center space-x-2 cursor-pointer"
+                  onClick={onOpenMenu}
+                >
+                  <FontAwesomeIcon icon={faUser} className="text-gray-300" />
+                  <span className="text-gray-300">{`Hola, ${
+                    user.name.split(" ")[0]
+                  }`}</span>
+                </div>
                 <FontAwesomeIcon
                   icon={faBagShopping}
                   className="text-gray-300 cursor-pointer"
@@ -62,14 +65,7 @@ const Header = ({ onOpenModal }) => {
                     toggleCart();
                   }}
                 />
-                <span className="text-gray-300">{user.name}</span>
               </div>
-              <button
-                onClick={handleLogout}
-                className="text-red-500 hover:text-red-300 ml-4"
-              >
-                Cerrar Sesión
-              </button>
               <Example
                 open={isCartOpen}
                 setOpen={setIsCartOpen}
@@ -83,9 +79,6 @@ const Header = ({ onOpenModal }) => {
                 onClick={onOpenModal}
                 icon={faUser}
               />
-              {/* <Link to="/login" className="hover:text-gray-300 hover:underline">
-                
-              </Link> */}
             </>
           )}
         </div>

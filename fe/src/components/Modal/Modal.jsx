@@ -1,45 +1,104 @@
-import React from "react";
-import "./Modal.css"; // Estilos para el modal
+import React, { useState } from "react";
+import apiClient from "../../API/axiosConfig";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Modal = ({ isOpen, onClose }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   if (!isOpen) return null;
 
+  const login = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await apiClient.post(
+        "http://localhost:5000/api/users/login",
+        { email, password }
+      );
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ name: response.data.name, id: response.data.id })
+      );
+      onClose();
+      navigate("/products");
+      toast.success("¡Sesión iniciada con éxito!");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.mensaje || "Error al iniciar sesión");
+      } else {
+        setError("Error al conectar con el servidor");
+      }
+      toast.error("Hubo un error al iniciar sesión.");
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="modal-overlay">
-      <div className="modal-container w-full max-w-3xl">
-        <button className="modal-close" onClick={onClose}>
-          &times;
-        </button>
-        <h2>Ingresar con email y contraseña</h2>
-        <form className="max-w-sm m-auto h-96 display-flex">
-          <div className="form-group">
-            <label className="text-left" htmlFor="email">
-              EMAIL
+    <div className="fixed top-0 left-0 w-full h-full bg-transparent backdrop-blur-lg flex items-center justify-center">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+        <div className="flex flex-row-reverse justify-between">
+          <button
+            className="bg-none border-none text-2xl cursor-pointer"
+            onClick={onClose}
+          >
+            &times;
+          </button>
+          <h2 className="text-2xl font-bold text-center mt-0">Login</h2>
+        </div>
+        <form className="space-y-4" onSubmit={login}>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mt-3"
+            >
+              Email
             </label>
             <input
-              type="email"
-              id="email"
+              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded shadow-sm focus:ring-blue-500 focus:border-blue-500"
               name="email"
-              placeholder="example@mail.com"
+              type="email"
               required
+              placeholder="Type your email"
+              onChange={(event) => setEmail(event.target.value)}
+              value={email}
             />
-          </div>
-          <div className="form-group">
-            <label className="text-left" htmlFor="password">
-              CONTRASEÑA
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mt-3"
+            >
+              Password
             </label>
             <input
-              type="password"
-              id="password"
+              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded shadow-sm focus:ring-blue-500 focus:border-blue-500"
               name="password"
-              placeholder="**********"
+              type="password"
               required
+              placeholder="Type your password"
+              onChange={(event) => setPassword(event.target.value)}
+              value={password}
             />
           </div>
-          <button type="submit" className="btn display-block w-full">
-            INGRESAR
+          <button
+            type="submit"
+            className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Log In
           </button>
         </form>
+        <div className="text-center">
+          <Link
+            className="text-gray-700 hover:underline"
+            to="/register"
+            onClick={onClose}
+          >
+            ¿No tienes una cuenta? REGÍSTRATE
+          </Link>
+        </div>
       </div>
     </div>
   );

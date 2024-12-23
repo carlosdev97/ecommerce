@@ -6,7 +6,7 @@ const Home = () => {
       className="flex items-center justify-center h-screen bg-cover bg-center"
       style={{
         backgroundImage:
-          "url('https://images.pexels.com/photos/18124138/pexels-photo-18124138/free-photo-of-mujer-sombrero-gorro-barandillas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+          "url('https://b2cmattelsa.vtexassets.com/assets/vtex.file-manager-graphql/images/fb4d9005-0831-40dc-8d1c-4da303b54cfd___74098bf5dd382ddb16867c559011e131.jpg')",
       }}
     ></div>
   );
