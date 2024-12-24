@@ -9,6 +9,11 @@ module.exports = {
       fontFamily: {
         homemade: ["Homemade Apple", "serif"], // Define el nombre y la familia
       },
+      colors: {
+        customGray: "#D8D8D8",
+        lightGray: "#F0F0F0",
+        limeGreen: "#8DBC25",
+      },
     },
   },
   plugins: [],

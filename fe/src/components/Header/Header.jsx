@@ -37,12 +37,12 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full backdrop-blur-md text-black py-4">
+    <header className="fixed top-0 left-0 w-full backdrop-blur-md bg-gray-400 bg-opacity-20 py-4">
       <nav className="container mx-auto flex justify-between items-center">
         <a href="/">
           <h1 className="font-homemade">Aesthetic Arc</h1>
         </a>
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-4 items-center text-white">
           {location.pathname === "/products" && user ? (
             <>
               {console.log(location.pathname)}
@@ -52,14 +52,12 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
                   className="flex items-center space-x-2 cursor-pointer"
                   onClick={onOpenMenu}
                 >
-                  <FontAwesomeIcon icon={faUser} className="text-gray-300" />
-                  <span className="text-gray-300">{`Hola, ${
-                    user.name.split(" ")[0]
-                  }`}</span>
+                  <FontAwesomeIcon icon={faUser} />
+                  <span>{`Hola, ${user.name.split(" ")[0]}`}</span>
                 </div>
                 <FontAwesomeIcon
                   icon={faBagShopping}
-                  className="text-gray-300 cursor-pointer"
+                  className="cursor-pointer"
                   onClick={() => {
                     getCart();
                     toggleCart();
