@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import apiClient from "../../API/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Modal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   if (!isOpen) return null;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   const login = async (event) => {
     event.preventDefault();
@@ -17,24 +23,53 @@ const Modal = ({ isOpen, onClose }) => {
         "http://localhost:5000/api/users/login",
         { email, password }
       );
+
+      // Guardar el token y la información del usuario
+
       localStorage.setItem("token", response.data.token);
       localStorage.setItem(
         "user",
         JSON.stringify({ name: response.data.name, id: response.data.id })
       );
+
+      // Cerrar el modal y redirigir
+
       onClose();
       navigate("/products");
       toast.success("¡Sesión iniciada con éxito!");
+
+      // Limpiar campos del formulario
+
       setEmail("");
       setPassword("");
     } catch (err) {
+      let errorMessage = "Error desconocido.";
+
+      // Verificar si hay una respuesta del servidor
+
       if (err.response) {
-        setError(err.response.data.mensaje || "Error al iniciar sesión");
+        switch (err.response.status) {
+          case 401:
+            errorMessage = "Credenciales incorrectas.";
+            break;
+          case 404:
+            errorMessage = "Usuario no encontrado.";
+            break;
+          case 500:
+            errorMessage = "Error en el servidor.";
+            break;
+          default:
+            errorMessage = err.response.data.mensaje || "Ocurrió un error";
+        }
+      } else if (err.request) {
+        // Sin respuesta del servidor
+        errorMessage = "No se pudo conectar con el servidor";
       } else {
-        setError("Error al conectar con el servidor");
+        // Error desconocido
+        errorMessage = err.message;
       }
-      toast.error("Hubo un error al iniciar sesión.");
-      console.log(error);
+      // Actualizar estado del error y mostrar mensaje
+      toast.error(errorMessage);
     }
   };
 
@@ -73,15 +108,22 @@ const Modal = ({ isOpen, onClose }) => {
             >
               Password
             </label>
-            <input
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              name="password"
-              type="password"
-              required
-              placeholder="Type your password"
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
-            />
+            <div className="relative flex items-center">
+              <input
+                className="w-full px-3 py-2 mt-1 border border-gray-300 rounded shadow-sm focus:ring-blue-500 focus:border-blue-500 pr-10"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                required
+                placeholder="Type your password"
+                onChange={(event) => setPassword(event.target.value)}
+                value={password}
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? faEye : faEyeSlash}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                onClick={togglePasswordVisibility}
+              />
+            </div>
           </div>
           <button
             type="submit"
