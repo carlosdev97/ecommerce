@@ -1,9 +1,7 @@
-import Example from "../Cart";
+import Cart from "../Cart";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
+import { IconShoppingBag, IconUser } from "@tabler/icons-react";
 import apiClient from "../../API/axiosConfig";
 
 const Header = ({ onOpenModal, onOpenMenu }) => {
@@ -31,7 +29,6 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
         `http://localhost:5000/api/cart/${user.id}`
       );
       setCartItems(response.data.products);
-      console.log(response.data.products);
     } catch (error) {
       console.error(error);
     }
@@ -51,11 +48,11 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
                   className="flex items-center space-x-2 cursor-pointer"
                   onClick={onOpenMenu}
                 >
-                  <FontAwesomeIcon icon={faUser} />
+                  <IconUser stroke={1.5} />
                   <span>{`Hola, ${user.name.split(" ")[0]}`}</span>
                 </div>
-                <FontAwesomeIcon
-                  icon={faBagShopping}
+                <IconShoppingBag
+                  stroke={1.5}
                   className="cursor-pointer"
                   onClick={() => {
                     getCart();
@@ -63,18 +60,19 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
                   }}
                 />
               </div>
-              <Example
+              <Cart
                 open={isCartOpen}
                 setOpen={setIsCartOpen}
                 items={cartItems}
+                user={user}
               />
             </>
           ) : (
             <>
-              <FontAwesomeIcon
+              <IconUser
+                stroke={1.5}
                 className="cursor-pointer"
                 onClick={onOpenModal}
-                icon={faUser}
               />
             </>
           )}

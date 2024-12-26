@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import apiClient from "../../API/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 const Modal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,11 +116,16 @@ const Modal = ({ isOpen, onClose }) => {
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
               />
-              <FontAwesomeIcon
-                icon={showPassword ? faEye : faEyeSlash}
+              <div
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
                 onClick={togglePasswordVisibility}
-              />
+              >
+                {showPassword ? (
+                  <IconEye stroke={1.5} />
+                ) : (
+                  <IconEyeClosed stroke={1.5} />
+                )}
+              </div>
             </div>
           </div>
           <button

@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import {
-  faUser,
-  faArrowRightFromBracket,
-  faFlag,
-  faBox,
-  faCircleInfo,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+  IconUser,
+  IconLogout,
+  IconFlag,
+  IconBox,
+  IconInfoCircle,
+} from "@tabler/icons-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Menu = ({ menuOpen, menuClose }) => {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   if (!menuOpen) return null;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setUser(null);
     navigate("/");
     menuClose();
   };
@@ -35,25 +32,25 @@ const Menu = ({ menuOpen, menuClose }) => {
         <ul className="space-y-2">
           <li>
             <Link className="w-full flex gap-2 items-center" to="/profile">
-              <FontAwesomeIcon icon={faUser} />
+              <IconUser stroke={1.5} />
               PERFIL
             </Link>
           </li>
           <li>
             <Link className="w-full flex gap-2 items-center" to="/addresses">
-              <FontAwesomeIcon icon={faFlag} />
+              <IconFlag stroke={1.5} />
               DIRECCIONES
             </Link>
           </li>
           <li>
             <Link className="w-full flex gap-2 items-center" to="/orders">
-              <FontAwesomeIcon icon={faBox} />
+              <IconBox stroke={1.5} />
               PEDIDOS
             </Link>
           </li>
           <li>
             <Link className="w-full flex gap-2 items-center" to="/info">
-              <FontAwesomeIcon icon={faCircleInfo} />
+              <IconInfoCircle stroke={1.5} />
               INFORMACIÓN
             </Link>
           </li>
@@ -62,7 +59,7 @@ const Menu = ({ menuOpen, menuClose }) => {
               onClick={handleLogout}
               className="text-red-500 hover:text-red-300 w-full flex gap-2 items-center"
             >
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              <IconLogout stroke={1.5} />
               CERRAR SESIÓN
             </button>
           </li>

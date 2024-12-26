@@ -1,9 +1,7 @@
 // import axios from "axios";
 import apiClient from "../API/axiosConfig";
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-
+import { IconShoppingCart } from "@tabler/icons-react";
 const Products = () => {
   const [products, setProducts] = useState([]);
 
@@ -41,10 +39,7 @@ const Products = () => {
                 <p className="mt-1 text-lg font-medium text-gray-900">
                   $ {product.price}
                 </p>
-                <FontAwesomeIcon
-                  icon={faCartPlus}
-                  className="text-blue-500 cursor-pointer"
-                />
+                <IconShoppingCart className="text-blue-500 cursor-pointer" />
               </div>
             </div>
           ))}
