@@ -2,7 +2,8 @@ import Example from "../Cart";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../API/axiosConfig";
 
 const Header = ({ onOpenModal, onOpenMenu }) => {
@@ -45,8 +46,6 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
         <div className="flex space-x-4 items-center text-white">
           {location.pathname === "/products" && user ? (
             <>
-              {console.log(location.pathname)}
-              {console.log(user)}
               <div className="flex items-center space-x-2">
                 <div
                   className="flex items-center space-x-2 cursor-pointer"
