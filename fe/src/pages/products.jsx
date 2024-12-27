@@ -2,10 +2,19 @@
 import apiClient from "../API/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { IconShoppingCart } from "@tabler/icons-react";
+import { useCart } from "../contexts/CartContext";
+
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState(null);
+  const { addToCart } = useCart();
 
   useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      const userObj = JSON.parse(savedUser);
+      setUser(userObj);
+    }
     const getProducts = async () => {
       try {
         const response = await apiClient.get(
@@ -39,7 +48,10 @@ const Products = () => {
                 <p className="mt-1 text-lg font-medium text-gray-900">
                   $ {product.price}
                 </p>
-                <IconShoppingCart className="text-blue-500 cursor-pointer" />
+                <IconShoppingCart
+                  className="text-blue-500 cursor-pointer"
+                  onClick={() => addToCart(user.id, product._id)}
+                />
               </div>
             </div>
           ))}

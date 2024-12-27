@@ -19,7 +19,7 @@ const Menu = ({ menuOpen, menuClose }) => {
     menuClose();
   };
   return (
-    <div className="fixed top-14 flex flex-row-reverse justify-between right-0 w-1/5 h-auto p-5 bg-customGray">
+    <div className="fixed top-14 flex flex-row-reverse justify-between right-0 w-1/5 h-auto p-5 bg-customGray ">
       <div className="flex flex-row-reverse justify-between items-start">
         <button
           className="bg-none border-none text-2xl cursor-pointer"

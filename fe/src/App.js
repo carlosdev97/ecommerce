@@ -8,6 +8,7 @@ import Modal from "./components/Modal/Modal";
 import Menu from "./components/Menu/Menu";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { CartProvider } from "../src/contexts/CartContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,17 +21,23 @@ function App() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <Router>
-      <Toaster />
-      <Header onOpenModal={openModal} onOpenMenu={openMenu} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
-      <Menu menuOpen={isMenuOpen} menuClose={closeMenu} />
-    </Router>
+    <CartProvider>
+      <Router>
+        <Toaster
+          toastOptions={{ duration: 5000 }}
+          position="bottom-right"
+          reverseOrder={false}
+        />
+        <Header onOpenModal={openModal} onOpenMenu={openMenu} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+        <Modal isOpen={isModalOpen} onClose={closeModal} />
+        <Menu menuOpen={isMenuOpen} menuClose={closeMenu} />
+      </Router>
+    </CartProvider>
   );
 }
 
