@@ -3,11 +3,15 @@ import apiClient from "../../API/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { IconEye, IconEyeClosed } from "@tabler/icons-react";
+import { useCart } from "../../contexts/CartContext";
+
 const Modal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { getCart } = useCart();
+
   if (!isOpen) return null;
 
   const togglePasswordVisibility = () => {
@@ -29,6 +33,8 @@ const Modal = ({ isOpen, onClose }) => {
         "user",
         JSON.stringify({ name: response.data.name, id: response.data.id })
       );
+
+      await getCart(response.data.id);
 
       // Cerrar el modal y redirigir
 
