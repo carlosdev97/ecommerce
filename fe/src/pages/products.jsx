@@ -1,7 +1,7 @@
 // import axios from "axios";
 import apiClient from "../API/axiosConfig";
 import React, { useEffect, useState } from "react";
-import { IconShoppingCart } from "@tabler/icons-react";
+import { IconShoppingBagPlus } from "@tabler/icons-react";
 import { useCart } from "../contexts/CartContext";
 
 const Products = () => {
@@ -48,7 +48,7 @@ const Products = () => {
                 <p className="mt-1 text-lg font-medium text-gray-900">
                   $ {product.price}
                 </p>
-                <IconShoppingCart
+                <IconShoppingBagPlus
                   className="text-blue-500 cursor-pointer"
                   onClick={() => addToCart(user.id, product._id)}
                 />

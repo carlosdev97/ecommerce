@@ -6,7 +6,7 @@ const Home = () => {
       className="flex items-center justify-center h-screen bg-cover bg-center"
       style={{
         backgroundImage:
-          "url('https://b2cmattelsa.vtexassets.com/assets/vtex.file-manager-graphql/images/fb4d9005-0831-40dc-8d1c-4da303b54cfd___74098bf5dd382ddb16867c559011e131.jpg')",
+          "url('https://b2cmattelsa.vtexassets.com/assets/vtex.file-manager-graphql/images/990f5da1-bd81-4fe0-a21b-d80816e2d18a___fb7708c2a83de5ab6fed34a4e1cd5e4e.jpg')",
       }}
     ></div>
   );
