@@ -5,9 +5,11 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useCart } from "../contexts/CartContext";
 
 export default function Cart({ open, setOpen, items, user }) {
-  console.log(user.id);
+  const { removeFromCart } = useCart();
+
   const subtotal = items.reduce(
     (acc, item) => acc + item.product.price * item.quantity,
     0
@@ -77,6 +79,9 @@ export default function Cart({ open, setOpen, items, user }) {
                                   <button
                                     type="button"
                                     className="font-medium text-indigo-600 hover:text-indigo-500"
+                                    onClick={() =>
+                                      removeFromCart(user.id, item.product._id)
+                                    }
                                   >
                                     Remove
                                   </button>

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import apiClient from "../API/axiosConfig";
+import { toast } from "react-hot-toast";
 
 const CartContext = createContext();
 
@@ -44,10 +45,17 @@ export const CartProvider = ({ children }) => {
         ];
       }
 
-      await apiClient.put(`http://localhost:5000/api/cart/update`, {
-        userId,
-        products: updatedProducts,
-      });
+      await toast.promise(
+        apiClient.put("http://localhost:5000/api/cart/update", {
+          userId,
+          products: updatedProducts,
+        }),
+        {
+          loading: "Agregando producto a la bolsa...",
+          success: "¡Producto agregado con éxito!",
+          error: "No se pudo agregar el producto a la bolsa.",
+        }
+      );
 
       setCart((prevCart) => ({
         ...prevCart,
@@ -58,8 +66,21 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const removeFromCart = async (userId, productId) => {
+    try {
+      await apiClient.delete(
+        `http://localhost:5000/api/cart/remove/${userId}/${productId}`
+      );
+      getCart(userId);
+    } catch (error) {
+      console.error("Error al eliminar el producto del carrito:", error);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cart, products, getCart, addToCart }}>
+    <CartContext.Provider
+      value={{ cart, products, getCart, addToCart, removeFromCart }}
+    >
       {children}
     </CartContext.Provider>
   );
