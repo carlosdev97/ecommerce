@@ -1,4 +1,4 @@
-import Cart from "../Cart";
+import Cart from "../Cart/Cart";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IconUser, IconShoppingBag, IconSearch } from "@tabler/icons-react";
@@ -47,7 +47,7 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
               <Link className="font-medium hover:underline">TIENDAS</Link>
             </li>
             <li>
-              <Link className="text-limeGreen font-medium hover:underline">
+              <Link className="text-limeGreen font-bold hover:underline">
                 SALE!
               </Link>
             </li>
