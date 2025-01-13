@@ -57,7 +57,9 @@ const Header = ({ onOpenModal, onOpenMenu }) => {
           <h1 className="font-homemade">Aesthetic Arc</h1>
         </a>
         <div className="flex space-x-4 flex-1 justify-end">
-          {location.pathname === "/products" && user ? (
+          {(location.pathname === "/products" ||
+            location.pathname === "/profile") &&
+          user ? (
             <>
               <div className="flex items-center space-x-2">
                 <div
