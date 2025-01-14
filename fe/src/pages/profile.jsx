@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../API/axiosConfig";
-import { IconEdit } from "@tabler/icons-react";
+import { IconEdit, IconX } from "@tabler/icons-react";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -14,6 +14,7 @@ const Profile = () => {
     },
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -51,7 +52,15 @@ const Profile = () => {
                 <label className="font-medium" htmlFor="">
                   NOMBRE
                 </label>
-                <div>{profile.user.name}</div>
+                {isEditing ? (
+                  <input
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    value={profile.user.name}
+                    type="text"
+                  />
+                ) : (
+                  <div>{profile.user.name}</div>
+                )}
               </div>
               <div className="flex flex-1 flex-col">
                 <label className="font-medium" htmlFor="">
@@ -89,7 +98,11 @@ const Profile = () => {
               </div>
             </div>
           </main>
-          <IconEdit stroke={1.5} />
+          {isEditing ? (
+            <IconX stroke={1.5} onClick={() => setIsEditing(false)} />
+          ) : (
+            <IconEdit stroke={1.5} onClick={() => setIsEditing(true)} />
+          )}
         </section>
       </div>
     );
