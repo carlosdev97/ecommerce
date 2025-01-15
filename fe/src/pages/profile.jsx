@@ -49,7 +49,7 @@ const Profile = () => {
           <main className="w-full space-y-6">
             <div className="flex">
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   NOMBRE
                 </label>
                 {isEditing ? (
@@ -57,51 +57,95 @@ const Profile = () => {
                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     value={profile.user.name}
                     type="text"
+                    onChange={(e) =>
+                      setProfile((prevProfile) => ({
+                        user: { ...prevProfile.user, name: e.target.value },
+                      }))
+                    }
                   />
                 ) : (
-                  <div>{profile.user.name}</div>
+                  <div className="py-2 px-4">{profile.user.name}</div>
                 )}
               </div>
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   CORREO ELECTRONICO
                 </label>
-                <div>{profile.user.email}</div>
+                {isEditing ? (
+                  <input
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    value={profile.user.email}
+                    type="email"
+                  />
+                ) : (
+                  <div className="py-2 px-4">{profile.user.email}</div>
+                )}
               </div>
             </div>
             <div className="flex">
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   DIRECCIÓN
                 </label>
-                <div>{profile.user.address}</div>
+                {isEditing ? (
+                  <input
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    value={profile.user.address}
+                    type="text"
+                  />
+                ) : (
+                  <div className="py-2 px-4">{profile.user.address}</div>
+                )}
               </div>
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   TELEFONO
                 </label>
-                <div>{profile.user.telephone}</div>
+                {isEditing ? (
+                  <input
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    value={profile.user.telephone}
+                    type="text"
+                  />
+                ) : (
+                  <div className="py-2 px-4">{profile.user.telephone}</div>
+                )}
               </div>
             </div>
             <div className="flex">
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   ROL
                 </label>
-                <div>{profile.user.role}</div>
+                <div className="py-2 px-4">{profile.user.role}</div>
               </div>
               <div className="flex flex-1 flex-col">
-                <label className="font-medium" htmlFor="">
+                <label className="font-medium py-2 px-4" htmlFor="">
                   FECHA REGISTRO
                 </label>
-                <div>{formatDate(profile.user.registrationdate)}</div>
+                <div className="py-2 px-4">
+                  {formatDate(profile.user.registrationdate)}
+                </div>
               </div>
             </div>
+            {isEditing ? (
+              <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Guardar
+              </button>
+            ) : null}
           </main>
           {isEditing ? (
-            <IconX stroke={1.5} onClick={() => setIsEditing(false)} />
+            <IconX
+              className="cursor-pointer"
+              stroke={1.5}
+              onClick={() => setIsEditing(false)}
+            />
           ) : (
-            <IconEdit stroke={1.5} onClick={() => setIsEditing(true)} />
+            <IconEdit
+              className="cursor-pointer"
+              stroke={1.5}
+              onClick={() => setIsEditing(true)}
+            />
           )}
         </section>
       </div>
