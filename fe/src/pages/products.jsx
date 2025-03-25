@@ -18,7 +18,7 @@ const Products = () => {
     const getProducts = async () => {
       try {
         const response = await apiClient.get(
-          "http://localhost:5000/api/products"
+          "https://ecommerce-jwpe.onrender.com/api/products"
         );
         setProducts(response.data);
       } catch (error) {

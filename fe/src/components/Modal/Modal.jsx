@@ -22,7 +22,7 @@ const Modal = ({ isOpen, onClose }) => {
     event.preventDefault();
     try {
       const response = await apiClient.post(
-        "http://localhost:5000/api/users/login",
+        "https://ecommerce-jwpe.onrender.com/api/users/login",
         { email, password }
       );
 

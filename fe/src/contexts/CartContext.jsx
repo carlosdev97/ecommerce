@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   const getCart = async (userId) => {
     try {
       const response = await apiClient.get(
-        `http://localhost:5000/api/cart/${userId}`
+        `https://ecommerce-jwpe.onrender.com/api/cart/${userId}`
       );
       setCart(response.data);
       setProducts(response.data.products);
@@ -46,7 +46,7 @@ export const CartProvider = ({ children }) => {
       }
 
       await toast.promise(
-        apiClient.put("http://localhost:5000/api/cart/update", {
+        apiClient.put("https://ecommerce-jwpe.onrender.com/api/cart/update", {
           userId,
           products: updatedProducts,
         }),
@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = async (userId, productId) => {
     try {
       await apiClient.delete(
-        `http://localhost:5000/api/cart/remove/${userId}/${productId}`
+        `https://ecommerce-jwpe.onrender.com/api/cart/remove/${userId}/${productId}`
       );
       getCart(userId);
     } catch (error) {
