@@ -1,19 +1,16 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "database_users",
-  password: "admin",
-  port: 5432,
+  connectionString: process.env.POSTGRES_URL, // Variable de entorno de Render
+  ssl: {
+    rejectUnauthorized: false, // Necesario para conexiones en la nube
+  },
 });
 
 const connectDBPostgres = async () => {
   try {
     await pool.connect();
-    console.log(
-      `Successful connection to PostgreSQL on port ${pool.options.port}.`
-    );
+    console.log("Successful connection to PostgreSQL.");
   } catch (error) {
     console.error("Error al conectar a PostgreSQL:", error.message);
   }
